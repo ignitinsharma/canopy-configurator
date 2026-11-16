@@ -126,7 +126,9 @@ function Scene({
   }, [reset, width, height, invalidate]);
   useFrame((_, delta) => {
     if (!goal.current || !controls.current) return;
-    const alpha = 1 - Math.exp(-delta * 7);
+    // Demand rendering may resume after a long idle; cap the first timestep
+    // so selection still animates rather than jumping directly to its goal.
+    const alpha = 1 - Math.exp(-Math.min(delta, 1 / 30) * 7);
     camera.position.lerp(goal.current.position, alpha);
     controls.current.target.lerp(goal.current.target, alpha);
     controls.current.update();

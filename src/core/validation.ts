@@ -59,7 +59,7 @@ export function validateConfig(
         if (
           geometry &&
           (e.fontSize *
-            geometry.printableArea.height *
+            (geometry.sizeMeters.height * 100) *
             e.transform.scale *
             72) /
             2.54 <

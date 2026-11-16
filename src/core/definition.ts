@@ -1,17 +1,23 @@
+import { atlasPolygon, polygonsOverlap } from './geometry';
 import { z } from 'zod';
 import { Id, Color, Positive, Unit } from './config';
-const Point = z.tuple([Unit, Unit]);
 const Resource = z.string().regex(/^\/(?!\/)[^\s?#]+$/);
 export const GeometrySchema = z.strictObject({
-  uvRect: z.tuple([Unit, Unit, Positive, Positive]),
-  uvCorners: z.tuple([Point, Point, Point, Point]),
-  aspectRatio: Positive,
-  printableArea: z.strictObject({
-    unit: z.literal('cm'),
-    width: Positive,
-    height: Positive,
-    polygon: z.array(Point).min(3),
-  }),
+  // Image coordinates: v increases from TOP. CanvasTexture must use flipY=false.
+  uvRect: z
+    .strictObject({ u0: Unit, v0: Unit, u1: Unit, v1: Unit })
+    .refine((r) => r.u1 > r.u0 && r.v1 > r.v0, 'Invalid UV bounds'),
+  // Clockwise atlas-space content rotation about the rectangle center. Rotate
+  // normalized section coordinates before fitting to the atlas rectangle.
+  atlasRotationDeg: z.union([
+    z.literal(0),
+    z.literal(90),
+    z.literal(180),
+    z.literal(270),
+  ]),
+  sizeMeters: z.strictObject({ width: Positive, height: Positive }),
+  // Upright triangle: apex at (.5,0), eave/base at y=1; clip before rotation.
+  shape: z.enum(['triangle', 'rect']),
   target: z.strictObject({
     nodeName: z.string().min(1),
     materialName: z.string().min(1),
@@ -60,6 +66,14 @@ export const ProductDefinitionSchema = z.strictObject({
       }),
     )
     .min(1),
+  materialResolution: z
+    .strictObject({
+      strategy: z.literal('material-name'),
+      printable: z.string().min(1),
+      inner: z.string().min(1),
+      frame: z.string().min(1),
+    })
+    .optional(),
   materialBindings: z.array(
     z.strictObject({
       id: Id,
@@ -102,9 +116,17 @@ export const ProductDefinitionSchema = z.strictObject({
         label: z.string().min(1),
         modelUrl: Resource,
         basePriceRef: Id,
+        realWidthMeters: Positive,
+        modelNormalization: z.strictObject({
+          method: z.literal('bounding-box-width'),
+          axis: z.enum(['x', 'z']),
+          note: z.string().min(1),
+        }),
         atlas: z.strictObject({
           widthPx: z.number().int().positive(),
           heightPx: z.number().int().positive(),
+          flipY: z.literal(false),
+          uvOrigin: z.literal('top-left'),
         }),
         sectionGeometry: z.record(Id, GeometrySchema),
       }),
@@ -173,53 +195,12 @@ export function parseDefinition(input: unknown): ProductDefinition {
           b = entries[j]!;
         if (
           a.target.nodeName === b.target.nodeName &&
-          a.target.materialName === b.target.materialName
-        ) {
-          const [x, y, w, h] = a.uvRect,
-            [bx, by, bw, bh] = b.uvRect;
-          if (
-            Math.min(x + w, bx + bw) - Math.max(x, bx) > 1e-9 &&
-            Math.min(y + h, by + bh) - Math.max(y, by) > 1e-9
-          )
-            throw new Error('OVERLAPPING_UV_REGIONS');
-        }
-      }
-    for (const g of entries) {
-      const [u, v, w, h] = g.uvRect;
-      if (
-        u + w > 1 + 1e-9 ||
-        v + h > 1 + 1e-9 ||
-        g.uvCorners.some(
-          ([x, y]) =>
-            x < u - 1e-9 ||
-            x > u + w + 1e-9 ||
-            y < v - 1e-9 ||
-            y > v + h + 1e-9,
+          a.target.materialName === b.target.materialName &&
+          polygonsOverlap(atlasPolygon(a), atlasPolygon(b))
         )
-      )
-        throw new Error('INVALID_UV_RECT');
-      const [a, b, c, e] = g.uvCorners;
-      const determinant =
-        (b[0] - a[0]) * (e[1] - a[1]) - (b[1] - a[1]) * (e[0] - a[0]);
-      if (
-        Math.abs(determinant) < 1e-12 ||
-        Math.abs(c[0] - (b[0] + e[0] - a[0])) > 1e-6 ||
-        Math.abs(c[1] - (b[1] + e[1] - a[1])) > 1e-6
-      )
-        throw new Error('NON_AFFINE_UV');
-      if (
-        Math.abs(
-          g.aspectRatio - g.printableArea.width / g.printableArea.height,
-        ) > 1e-6
-      )
-        throw new Error('INVALID_ASPECT_RATIO');
-      const polygon = g.printableArea.polygon;
-      const area = polygon.reduce((sum, p, i) => {
-        const q = polygon[(i + 1) % polygon.length]!;
-        return sum + p[0] * q[1] - q[0] * p[1];
-      }, 0);
-      if (Math.abs(area) < 1e-9) throw new Error('DEGENERATE_POLYGON');
-    }
+          throw new Error('OVERLAPPING_PRINTABLE_REGIONS');
+      }
   }
+
   return d;
 }

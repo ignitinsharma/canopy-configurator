@@ -3,25 +3,10 @@ import { parseDefinition } from './definition';
 import { createConfigStore } from './store';
 import type { ProductConfig, TextElement } from './config';
 const geometry = {
-  uvRect: [0, 0, 1, 1],
-  uvCorners: [
-    [0, 1],
-    [1, 1],
-    [1, 0],
-    [0, 0],
-  ],
-  aspectRatio: 1,
-  printableArea: {
-    unit: 'cm',
-    width: 100,
-    height: 100,
-    polygon: [
-      [0, 0],
-      [1, 0],
-      [1, 1],
-      [0, 1],
-    ],
-  },
+  uvRect: { u0: 0, v0: 0, u1: 1, v1: 1 },
+  atlasRotationDeg: 0,
+  sizeMeters: { width: 1, height: 1 },
+  shape: 'rect',
   target: { nodeName: 'surface', materialName: 'print', uvSet: 0 },
 };
 const definition = {
@@ -69,7 +54,18 @@ const definition = {
     label: id,
     modelUrl: '/model.glb',
     basePriceRef: 'base',
-    atlas: { widthPx: 2048, heightPx: 2048 },
+    realWidthMeters: 1,
+    modelNormalization: {
+      method: 'bounding-box-width',
+      axis: 'x',
+      note: 'Test model',
+    },
+    atlas: {
+      widthPx: 2048,
+      heightPx: 2048,
+      flipY: false,
+      uvOrigin: 'top-left',
+    },
     sectionGeometry: { front: geometry },
   })),
   optionGroups: [],

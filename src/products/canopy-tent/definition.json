@@ -1,1 +1,784 @@
-{}
+{
+  "schemaVersion": 1,
+  "id": "canopy-tent",
+  "revision": "measured-1",
+  "name": "Canopy tent",
+  "pricing": {
+    "configurationRef": "canopy-pricing-v1"
+  },
+  "commerce": {
+    "catalogRef": "canopy-catalog-v1"
+  },
+  "fonts": [
+    {
+      "id": "inter-regular",
+      "family": "Inter",
+      "fileUrl": "/fonts/inter-regular.woff2",
+      "weight": 400,
+      "style": "normal"
+    }
+  ],
+  "materialResolution": {
+    "strategy": "material-name",
+    "printable": "fabric_Mat",
+    "inner": "Inner_fabric",
+    "frame": "Metal_mat"
+  },
+  "materialBindings": [
+    {
+      "id": "frame",
+      "nodeNames": ["leg", "mechanism"],
+      "materialName": "Metal_mat",
+      "property": "color"
+    }
+  ],
+  "sections": [
+    {
+      "id": "roof-front",
+      "label": "Roof Front",
+      "type": "roof",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    },
+    {
+      "id": "valance-front",
+      "label": "Valance Front",
+      "type": "valance",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    },
+    {
+      "id": "roof-back",
+      "label": "Roof Back",
+      "type": "roof",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    },
+    {
+      "id": "valance-back",
+      "label": "Valance Back",
+      "type": "valance",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    },
+    {
+      "id": "roof-left",
+      "label": "Roof Left",
+      "type": "roof",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    },
+    {
+      "id": "valance-left",
+      "label": "Valance Left",
+      "type": "valance",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    },
+    {
+      "id": "roof-right",
+      "label": "Roof Right",
+      "type": "roof",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    },
+    {
+      "id": "valance-right",
+      "label": "Valance Right",
+      "type": "valance",
+      "variantIds": ["5x5", "6.5x6.5", "8x8"],
+      "allowedElementTypes": ["text", "image"],
+      "constraints": {
+        "maxElements": 20,
+        "minFontSizePt": 12,
+        "allowedFontIds": ["inter-regular"],
+        "maxTextLength": 1000,
+        "image": {
+          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "maxBytes": 10485760,
+          "maxWidthPx": 8192,
+          "maxHeightPx": 8192,
+          "maxPixels": 40000000,
+          "recommendedDpi": 150
+        }
+      }
+    }
+  ],
+  "variants": [
+    {
+      "id": "5x5",
+      "label": "5x5",
+      "modelUrl": "/models/canopy-5x5.glb",
+      "basePriceRef": "canopy-base-5x5",
+      "realWidthMeters": 1.524,
+      "modelNormalization": {
+        "method": "bounding-box-width",
+        "axis": "x",
+        "note": "Uniformly scale model from its world-space bounding-box width to realWidthMeters; never rescale measured printable dimensions."
+      },
+      "atlas": {
+        "widthPx": 2048,
+        "heightPx": 2048,
+        "flipY": false,
+        "uvOrigin": "top-left"
+      },
+      "sectionGeometry": {
+        "roof-front": {
+          "uvRect": {
+            "u0": 0.2548,
+            "v0": 0.535,
+            "u1": 0.7447,
+            "v1": 0.8715
+          },
+          "atlasRotationDeg": 0,
+          "sizeMeters": {
+            "width": 1.524,
+            "height": 1.153
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-front": {
+          "uvRect": {
+            "u0": 0.2557,
+            "v0": 0.8815,
+            "u1": 0.7464,
+            "v1": 0.9616
+          },
+          "atlasRotationDeg": 0,
+          "sizeMeters": {
+            "width": 1.526,
+            "height": 0.304
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-back": {
+          "uvRect": {
+            "u0": 0.256,
+            "v0": 0.1302,
+            "u1": 0.7408,
+            "v1": 0.4663
+          },
+          "atlasRotationDeg": 180,
+          "sizeMeters": {
+            "width": 1.508,
+            "height": 1.154
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-back": {
+          "uvRect": {
+            "u0": 0.2564,
+            "v0": 0.0413,
+            "u1": 0.7408,
+            "v1": 0.1212
+          },
+          "atlasRotationDeg": 180,
+          "sizeMeters": {
+            "width": 1.511,
+            "height": 0.304
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-left": {
+          "uvRect": {
+            "u0": 0.1169,
+            "v0": 0.257,
+            "u1": 0.4523,
+            "v1": 0.7409
+          },
+          "atlasRotationDeg": 90,
+          "sizeMeters": {
+            "width": 1.51,
+            "height": 1.154
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-left": {
+          "uvRect": {
+            "u0": 0.0285,
+            "v0": 0.2573,
+            "u1": 0.1082,
+            "v1": 0.7407
+          },
+          "atlasRotationDeg": 90,
+          "sizeMeters": {
+            "width": 1.508,
+            "height": 0.303
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-right": {
+          "uvRect": {
+            "u0": 0.5288,
+            "v0": 0.2477,
+            "u1": 0.8672,
+            "v1": 0.7352
+          },
+          "atlasRotationDeg": 270,
+          "sizeMeters": {
+            "width": 1.521,
+            "height": 1.158
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-right": {
+          "uvRect": {
+            "u0": 0.8768,
+            "v0": 0.2432,
+            "u1": 0.9568,
+            "v1": 0.7325
+          },
+          "atlasRotationDeg": 270,
+          "sizeMeters": {
+            "width": 1.522,
+            "height": 0.304
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "6.5x6.5",
+      "label": "6.5x6.5",
+      "modelUrl": "/models/canopy-6.5x6.5.glb",
+      "basePriceRef": "canopy-base-6.5x6.5",
+      "realWidthMeters": 1.98,
+      "modelNormalization": {
+        "method": "bounding-box-width",
+        "axis": "x",
+        "note": "6.5 GLB mesh is mis-scaled. Uniformly scale model from its world-space bounding-box width to realWidthMeters; never rescale measured printable dimensions."
+      },
+      "atlas": {
+        "widthPx": 2048,
+        "heightPx": 2048,
+        "flipY": false,
+        "uvOrigin": "top-left"
+      },
+      "sectionGeometry": {
+        "roof-front": {
+          "uvRect": {
+            "u0": 0.2718,
+            "v0": 0.5191,
+            "u1": 0.731,
+            "v1": 0.8819
+          },
+          "atlasRotationDeg": 0,
+          "sizeMeters": {
+            "width": 1.515,
+            "height": 1.192
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-front": {
+          "uvRect": {
+            "u0": 0.2688,
+            "v0": 0.8894,
+            "u1": 0.7295,
+            "v1": 0.9871
+          },
+          "atlasRotationDeg": 0,
+          "sizeMeters": {
+            "width": 1.52,
+            "height": 0.321
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-back": {
+          "uvRect": {
+            "u0": 0.2669,
+            "v0": 0.1196,
+            "u1": 0.7266,
+            "v1": 0.4837
+          },
+          "atlasRotationDeg": 180,
+          "sizeMeters": {
+            "width": 1.517,
+            "height": 1.199
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-back": {
+          "uvRect": {
+            "u0": 0.2633,
+            "v0": 0.0151,
+            "u1": 0.724,
+            "v1": 0.1131
+          },
+          "atlasRotationDeg": 180,
+          "sizeMeters": {
+            "width": 1.52,
+            "height": 0.322
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-left": {
+          "uvRect": {
+            "u0": 0.1186,
+            "v0": 0.2719,
+            "u1": 0.4814,
+            "v1": 0.7315
+          },
+          "atlasRotationDeg": 90,
+          "sizeMeters": {
+            "width": 1.517,
+            "height": 1.192
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-left": {
+          "uvRect": {
+            "u0": 0.0141,
+            "v0": 0.2738,
+            "u1": 0.1115,
+            "v1": 0.7349
+          },
+          "atlasRotationDeg": 90,
+          "sizeMeters": {
+            "width": 1.522,
+            "height": 0.32
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-right": {
+          "uvRect": {
+            "u0": 0.5206,
+            "v0": 0.2692,
+            "u1": 0.8836,
+            "v1": 0.7288
+          },
+          "atlasRotationDeg": 270,
+          "sizeMeters": {
+            "width": 1.517,
+            "height": 1.192
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-right": {
+          "uvRect": {
+            "u0": 0.8898,
+            "v0": 0.2687,
+            "u1": 0.9873,
+            "v1": 0.7296
+          },
+          "atlasRotationDeg": 270,
+          "sizeMeters": {
+            "width": 1.521,
+            "height": 0.321
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "8x8",
+      "label": "8x8",
+      "modelUrl": "/models/canopy-8x8.glb",
+      "basePriceRef": "canopy-base-8x8",
+      "realWidthMeters": 2.44,
+      "modelNormalization": {
+        "method": "bounding-box-width",
+        "axis": "x",
+        "note": "Uniformly scale model from its world-space bounding-box width to realWidthMeters; never rescale measured printable dimensions."
+      },
+      "atlas": {
+        "widthPx": 2048,
+        "heightPx": 2048,
+        "flipY": false,
+        "uvOrigin": "top-left"
+      },
+      "sectionGeometry": {
+        "roof-front": {
+          "uvRect": {
+            "u0": 0.2104,
+            "v0": 0.5365,
+            "u1": 0.7843,
+            "v1": 0.8918
+          },
+          "atlasRotationDeg": 0,
+          "sizeMeters": {
+            "width": 2.422,
+            "height": 1.607
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-front": {
+          "uvRect": {
+            "u0": 0.2116,
+            "v0": 0.8997,
+            "u1": 0.7842,
+            "v1": 0.975
+          },
+          "atlasRotationDeg": 0,
+          "sizeMeters": {
+            "width": 2.416,
+            "height": 0.358
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-back": {
+          "uvRect": {
+            "u0": 0.2165,
+            "v0": 0.1154,
+            "u1": 0.7901,
+            "v1": 0.4734
+          },
+          "atlasRotationDeg": 180,
+          "sizeMeters": {
+            "width": 2.421,
+            "height": 1.619
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-back": {
+          "uvRect": {
+            "u0": 0.2173,
+            "v0": 0.0318,
+            "u1": 0.7897,
+            "v1": 0.1074
+          },
+          "atlasRotationDeg": 180,
+          "sizeMeters": {
+            "width": 2.416,
+            "height": 0.358
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-left": {
+          "uvRect": {
+            "u0": 0.104,
+            "v0": 0.2251,
+            "u1": 0.4597,
+            "v1": 0.7994
+          },
+          "atlasRotationDeg": 90,
+          "sizeMeters": {
+            "width": 2.424,
+            "height": 1.611
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-left": {
+          "uvRect": {
+            "u0": 0.0132,
+            "v0": 0.2253,
+            "u1": 0.0886,
+            "v1": 0.7981
+          },
+          "atlasRotationDeg": 90,
+          "sizeMeters": {
+            "width": 2.417,
+            "height": 0.358
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "roof-right": {
+          "uvRect": {
+            "u0": 0.5297,
+            "v0": 0.2278,
+            "u1": 0.8852,
+            "v1": 0.8021
+          },
+          "atlasRotationDeg": 270,
+          "sizeMeters": {
+            "width": 2.424,
+            "height": 1.61
+          },
+          "shape": "triangle",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        },
+        "valance-right": {
+          "uvRect": {
+            "u0": 0.896,
+            "v0": 0.227,
+            "u1": 0.9716,
+            "v1": 0.7999
+          },
+          "atlasRotationDeg": 270,
+          "sizeMeters": {
+            "width": 2.418,
+            "height": 0.358
+          },
+          "shape": "rect",
+          "target": {
+            "nodeName": "fabric",
+            "materialName": "fabric_Mat",
+            "uvSet": 0
+          }
+        }
+      }
+    }
+  ],
+  "optionGroups": [
+    {
+      "id": "frame-color",
+      "label": "Frame color",
+      "kind": "single",
+      "role": "material-color",
+      "bindingId": "frame",
+      "choices": [
+        {
+          "id": "silver",
+          "label": "Silver",
+          "color": "#B8BBC0"
+        },
+        {
+          "id": "black",
+          "label": "Black",
+          "color": "#202020"
+        }
+      ],
+      "defaultValue": "silver"
+    },
+    {
+      "id": "fabric-base-color",
+      "label": "Fabric base color",
+      "kind": "single",
+      "role": "commercial",
+      "choices": [
+        {
+          "id": "white",
+          "label": "White",
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "navy",
+          "label": "Navy",
+          "color": "#17324D"
+        }
+      ],
+      "defaultValue": "white"
+    },
+    {
+      "id": "accessories",
+      "label": "Accessories",
+      "kind": "multi",
+      "role": "commercial",
+      "choices": [
+        {
+          "id": "sidewalls",
+          "label": "Sidewalls",
+          "pricingRef": "accessory-sidewalls"
+        },
+        {
+          "id": "carry-bag",
+          "label": "Carry bag",
+          "pricingRef": "accessory-carry-bag"
+        }
+      ],
+      "defaultValue": [],
+      "maxSelections": 2
+    }
+  ]
+}

@@ -11,4 +11,4 @@ Product-agnostic schemas and state. Core imports no product definition, renderer
 
 Correctable small-font errors remain editable; invalid structure and references are rejected atomically. Quotes, renderer caches, asset bytes and selection do not serialize. JSON exports require referenced assets in the separate asset store. Never use the preview atlas as print output.
 
-The canopy definition remains a calibration placeholder. Renderer composition, pricing orchestration, real commerce catalog mapping and PDF generation are separate future feature implementations.
+The canopy definition now includes supplied measured geometry. Atlas UVs use top-origin bounds and flipY=false; overlap validation uses rotated printable polygons because roof bounding rectangles overlap. Renderer composition, pricing orchestration, real commerce catalog mapping and PDF generation are separate future feature implementations.

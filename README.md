@@ -2,7 +2,7 @@
 
 ## Overview
 
-Private technical-test foundation for an embeddable, reusable product configurator. Only the responsive shell and tooling are implemented. Editing, rendering, pricing, cart, PDF and messaging remain placeholders.
+Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. Editing, rendering, mock endpoint behavior, PDF and messaging remain future work.
 
 ## Architecture
 
@@ -10,11 +10,11 @@ Private technical-test foundation for an embeddable, reusable product configurat
 
 ## Config data model
 
-Placeholder: define the Zod schema and serializable configuration contract before populating `products/canopy-tent/definition.json`.
+Strict Zod schemas define the serializable configuration and product definition. The canopy definition contains three measured sizes with eight printable sections each. Atlas rectangles use top-origin normalized bounds, quarter-turn content rotations and meter dimensions. Printable triangle interiors, rather than overlapping roof bounding rectangles, are checked for overlap.
 
 ## Pricing and Shopify integration
 
-Placeholder: define PricingService and CommerceAdapter contracts in core, then implement MSW-backed `/api/price` and `/api/cart` adapters. No requests or Shopify integration are active.
+PricingService, CommerceAdapter and AssetStore contracts are implemented with injectable HTTP pricing/cart adapters and an IndexedDB image store. MSW endpoint behavior and production Shopify mappings remain pending. Nothing is wired into the shell yet.
 
 ## 2D/3D sync
 

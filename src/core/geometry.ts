@@ -3,12 +3,71 @@ import type { GeometrySchema } from './definition';
 import type { DesignElement } from './config';
 export type Geometry = z.infer<typeof GeometrySchema>;
 export type Point = readonly [number, number];
+export function clipPolygon(g: Pick<Geometry, 'shape'>): Point[] {
+  return g.shape === 'triangle'
+    ? [
+        [0.5, 0],
+        [1, 1],
+        [0, 1],
+      ]
+    : [
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+      ];
+}
 export function sectionToUv(g: Geometry, [x, y]: Point): Point {
-  const [a, b, , d] = g.uvCorners;
-  return [
-    a[0] + x * (b[0] - a[0]) + y * (d[0] - a[0]),
-    a[1] + x * (b[1] - a[1]) + y * (d[1] - a[1]),
-  ];
+  const r = g.atlasRotationDeg;
+  const [rx, ry] =
+    r === 90
+      ? [1 - y, x]
+      : r === 180
+        ? [1 - x, 1 - y]
+        : r === 270
+          ? [y, 1 - x]
+          : [x, y];
+  const { u0, v0, u1, v1 } = g.uvRect;
+  return [u0 + rx! * (u1 - u0), v0 + ry! * (v1 - v0)];
+}
+export function atlasPolygon(g: Geometry): Point[] {
+  return clipPolygon(g).map((p) => sectionToUv(g, p));
+}
+/** Separating-axis test for convex printable shapes. Touching edges are allowed. */
+export function polygonsOverlap(a: Point[], b: Point[]): boolean {
+  for (const polygon of [a, b])
+    for (let i = 0; i < polygon.length; i++) {
+      const p = polygon[i]!,
+        q = polygon[(i + 1) % polygon.length]!;
+      const axis: Point = [-(q[1] - p[1]), q[0] - p[0]];
+      const project = (points: Point[]) =>
+        points.map((v) => v[0] * axis[0] + v[1] * axis[1]);
+      const pa = project(a),
+        pb = project(b);
+      if (
+        Math.min(Math.max(...pa), Math.max(...pb)) -
+          Math.max(Math.min(...pa), Math.min(...pb)) <=
+        1e-10
+      )
+        return false;
+    }
+  return true;
+}
+export function sectionAspectRatio(g: Geometry) {
+  return g.sizeMeters.width / g.sizeMeters.height;
+}
+export function modelScaleForWidth(
+  realWidthMeters: number,
+  boundingBoxWidth: number,
+) {
+  if (
+    !Number.isFinite(boundingBoxWidth) ||
+    boundingBoxWidth <= 0 ||
+    !Number.isFinite(realWidthMeters) ||
+    realWidthMeters <= 0
+  )
+    throw new Error('INVALID_MODEL_WIDTH');
+  return realWidthMeters / boundingBoxWidth;
 }
 export function elementCorners(e: DesignElement): Point[] {
   const { position: p, size, scale, rotationDeg } = e.transform;
@@ -66,8 +125,8 @@ export function imageDpi(
   g: Geometry,
 ) {
   const width =
-    e.transform.size.width * e.transform.scale * g.printableArea.width;
+    e.transform.size.width * e.transform.scale * (g.sizeMeters.width * 100);
   const height =
-    e.transform.size.height * e.transform.scale * g.printableArea.height;
+    e.transform.size.height * e.transform.scale * (g.sizeMeters.height * 100);
   return Math.max(widthPx / (width / 2.54), heightPx / (height / 2.54));
 }

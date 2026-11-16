@@ -130,3 +130,43 @@ export function imageDpi(
     e.transform.size.height * e.transform.scale * (g.sizeMeters.height * 100);
   return Math.max(widthPx / (width / 2.54), heightPx / (height / 2.54));
 }
+
+/** UV coordinates are the raw glTF/top-origin coordinates (CanvasTexture.flipY=false).
+ * Test clipped polygons, not overlapping roof bounding rectangles. */
+export function sectionFromUv(
+  geometry: Record<string, Geometry>,
+  u: number,
+  v: number,
+): string | null {
+  if (
+    !Number.isFinite(u) ||
+    !Number.isFinite(v) ||
+    u < 0 ||
+    u > 1 ||
+    v < 0 ||
+    v > 1
+  )
+    return null;
+  for (const [id, section] of Object.entries(geometry))
+    if (containsPoint(atlasPolygon(section), [u, v])) return id;
+  return null;
+}
+export function normalizationForBounds(
+  min: readonly [number, number, number],
+  max: readonly [number, number, number],
+  realWidth: number,
+  axis: 'x' | 'z' = 'x',
+) {
+  const scale = modelScaleForWidth(
+    realWidth,
+    max[axis === 'x' ? 0 : 2] - min[axis === 'x' ? 0 : 2],
+  );
+  return {
+    scale,
+    position: [
+      (-(min[0] + max[0]) * scale) / 2,
+      -min[1] * scale,
+      (-(min[2] + max[2]) * scale) / 2,
+    ] as [number, number, number],
+  };
+}

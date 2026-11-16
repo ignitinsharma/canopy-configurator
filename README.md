@@ -2,7 +2,7 @@
 
 ## Overview
 
-Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. Editing, rendering, mock endpoint behavior, PDF and messaging remain future work.
+Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. The demand-rendered 3D viewer is wired to size/color/section controls. 2D editing, artwork compositing, mock endpoint behavior, PDF and messaging remain future work.
 
 ## Architecture
 
@@ -18,7 +18,7 @@ PricingService, CommerceAdapter and AssetStore contracts are implemented with in
 
 ## 2D/3D sync
 
-Placeholder: one shared configuration will drive the future Konva editor and react-three-fiber preview. Coordinate mapping and update rules remain to be designed.
+The 3D preview reads the shared Zustand config. Selection uses clipped UV polygons and updates the same store. The Konva editor and artwork compositor remain future work.
 
 ## Embedding (iframe + postMessage)
 
@@ -28,7 +28,7 @@ Placeholder: define message contracts, allowed origins and resize behavior befor
 
 ## Performance
 
-Placeholder: establish asset budgets, lazy-load feature modules and measure rendering performance. Heavy graphics libraries are installed but not loaded by the scaffold. `public/models` is reserved for approved optimized models.
+Placeholder: establish asset budgets, lazy-load feature modules and measure rendering performance. The viewer and graphics libraries live in a separate lazy-loaded chunk. `public/models` is reserved for approved optimized models.
 
 ## Running locally
 
@@ -60,3 +60,9 @@ Below 900px the workspace uses Options / 2D / 3D view buttons and a pinned price
 - CSS variables provide theming without a UI library.
 - Original confidential GLBs and PDFs stay in ignored `assets-source/`; they are never copied to the public directory automatically. Place existing originals there locally; none are supplied by this scaffold.
 - The GitHub repository must remain private. No deployment is configured.
+
+## Model optimization and viewer verification
+
+Place original GLBs in ignored `assets-source/`, then run `pnpm optimize:models`. The script preserves node/material names, removes only printable baseColor artwork, keeps normal/roughness and frame maps, converts remaining textures to WebP (maximum 1024 square), applies Draco compression and copies its decoder locally. Optimized GLBs and decoder assets are committed; CI does not require confidential originals.
+
+Open `/?debug=atlas` to verify all sizes and sections using the Options controls. See `src/features/viewer3d/README.md` for the capture API, ownership/disposal rules and iframe hosting requirements.

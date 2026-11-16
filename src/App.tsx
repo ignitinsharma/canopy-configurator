@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import clsx from 'clsx';
 import { useEmbedMode } from '@features/embed/useEmbedMode';
+
+import { ConfiguratorProvider } from './features/ConfiguratorContext';
+import { OptionsPanel } from './features/panels/OptionsPanel';
+const Viewer = lazy(() => import('./features/viewer3d/Viewer'));
 
 const areas = [
   {
@@ -25,6 +29,13 @@ const areas = [
 type Area = (typeof areas)[number]['id'];
 
 export default function App() {
+  return (
+    <ConfiguratorProvider>
+      <AppShell />
+    </ConfiguratorProvider>
+  );
+}
+function AppShell() {
   const embed = useEmbedMode();
   const [activeArea, setActiveArea] = useState<Area>('options');
   return (
@@ -62,13 +73,27 @@ export default function App() {
               )}
             >
               <h1 id={`heading-${area.id}`}>{area.title}</h1>
-              <div className="placeholder">
-                <span className="placeholder-mark" aria-hidden="true">
-                  +
-                </span>
-                <p>{area.description}</p>
-                <span className="status">Coming in a future phase</span>
-              </div>
+              {area.id === 'options' ? (
+                <OptionsPanel />
+              ) : area.id === 'viewer' ? (
+                <Suspense
+                  fallback={
+                    <div className="viewer-skeleton" role="status">
+                      Loading 3D preview…
+                    </div>
+                  }
+                >
+                  <Viewer />
+                </Suspense>
+              ) : (
+                <div className="placeholder">
+                  <span className="placeholder-mark" aria-hidden="true">
+                    +
+                  </span>
+                  <p>{area.description}</p>
+                  <span className="status">Coming in a future phase</span>
+                </div>
+              )}
             </section>
           ))}
         </div>

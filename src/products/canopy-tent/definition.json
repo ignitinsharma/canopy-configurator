@@ -27,7 +27,7 @@
   "materialBindings": [
     {
       "id": "frame",
-      "nodeNames": ["leg", "mechanism"],
+      "nodeNames": ["leg", "mechanism", "leg5", "mechanism3"],
       "materialName": "Metal_mat",
       "property": "color"
     }

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. The demand-rendered 3D viewer is wired to size/color/section controls. Shared artwork rendering, image uploads and temporary editing controls feed the live 3D preview. The Konva editor, mock endpoint behavior, PDF and messaging remain future work.
+Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. The demand-rendered 3D viewer is wired to size/color/section controls. Shared artwork rendering, image uploads and temporary editing controls feed the live 3D preview. The Konva editor now edits the same store with live 3D updates. Mock endpoint behavior, PDF and messaging remain future work.
 
 ## Architecture
 
@@ -18,7 +18,7 @@ PricingService, CommerceAdapter and AssetStore contracts are implemented with in
 
 ## 2D/3D sync
 
-The 3D preview reads the shared Zustand config. Selection uses clipped UV polygons and updates the same store. A shared local-canvas renderer composites customer text/images into the atlas, with per-section dirty tracking and separate debug/selection presentation. The Konva editor remains future work.
+The 3D preview reads the shared Zustand config. Selection uses clipped UV polygons and updates the same store. A shared local-canvas renderer composites customer text/images into the atlas, with per-section dirty tracking and separate debug/selection presentation. The lazy Konva editor reuses the same renderer for its artwork image and thumbnails; interaction handles and guides remain separate.
 
 ## Embedding (iframe + postMessage)
 

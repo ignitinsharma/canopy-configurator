@@ -1,3 +1,11 @@
-# editor2d
+# 2D editor
 
-Future Konva-based 2D editor.
+The lazy editor uses two Konva layers: a single artwork Image sourced from the shared core renderSection canvas, and transparent hit rectangles/Transformer plus non-baked guides. Konva never draws customer text/images. The selected artwork surface is capped at a 1024-pixel longest side; thumbnails use 128 pixels. Font/image readiness and structurally shared section references invalidate only affected caches. Development render-count tests verify unchanged sections stay untouched.
+
+Coordinates are normalized config values, physical meters, and local pixels at 400 CSS pixels/meter for 100% zoom. View translation/scale converts local to stage coordinates. Fit responds to ResizeObserver. Wheel/pinch anchor zoom and space-drag/two-finger pan never change configuration. Corner resizing preserves uniform scale for both text and images; rotation is normalized to -180..180 degrees. Centers are projected into the printable polygon. Snapping uses a six-screen-pixel tolerance for center lines, edges and physical safe margins; Alt bypasses snapping. Safe/bleed defaults are proposed guide values (25 mm/3 mm), not verified production requirements.
+
+Gesture sessions coalesce live store updates with requestAnimationFrame, flush the final pointer value before commit, and record one undo entry. Pointer cancel rolls back. The same store drives the 3D atlas while dragging. Inline text uses a native textarea with matching typography/transform; Enter commits, Shift+Enter inserts a newline, Escape cancels and blur commits. Each edit session is one transaction.
+
+One provider-level keyboard handler owns undo/redo, Delete/Backspace, modifier+D and arrow nudges (Shift = ten steps). Form fields retain native editing shortcuts. Undo/redo stay in the price bar across mobile tabs. The thumbnail strip moves above the canvas on mobile; touch handles are larger and the canvas prevents page scrolling during interaction.
+
+Run pnpm dev, then add artwork in Options. Drag it in 2D while watching 3D on desktop, on both a roof and valance. Resize/rotate, snap to center, double-click text, undo/redo complete gestures, click a section in 3D to switch the editor, and check mobile drag/pinch. Guides, thumbnails and interaction handles never enter the artwork or captures.

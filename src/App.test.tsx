@@ -1,6 +1,9 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, expect, it, vi } from 'vitest';
 import App from './App';
+vi.mock('./features/editor2d/Editor', () => ({
+  default: () => <div>2D test editor</div>,
+}));
 vi.mock('./features/viewer3d/Viewer', () => ({
   default: () => <div>3D test preview</div>,
 }));

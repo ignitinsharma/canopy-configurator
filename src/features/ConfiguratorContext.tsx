@@ -3,6 +3,7 @@ import { useStore } from 'zustand';
 import { createConfigStore } from '@core/store';
 import { parseDefinition } from '@core/definition';
 import { createIndexedDbAssetStore } from '@services/indexedDbAssetStore';
+import { useConfiguratorKeyboard } from './keyboard';
 import raw from '@products/canopy-tent/definition.json';
 export type Configurator = ReturnType<typeof createConfigStore> & {
   assets: ReturnType<typeof createIndexedDbAssetStore>;
@@ -31,6 +32,7 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     });
     return { ...runtime, assets: createIndexedDbAssetStore() };
   });
+  useConfiguratorKeyboard(instance);
   return <Context.Provider value={instance}>{children}</Context.Provider>;
 }
 export function useConfigurator() {

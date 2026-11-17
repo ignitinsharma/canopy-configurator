@@ -8,8 +8,7 @@ export function ArtworkControls() {
   const { store, actions, assets } = useConfigurator();
   const definition = useConfigSelector((s) => s.definition),
     config = useConfigSelector((s) => s.config),
-    ui = useConfigSelector((s) => s.ui),
-    history = useConfigSelector((s) => s.history);
+    ui = useConfigSelector((s) => s.ui);
   const sectionId = ui.selectedSectionId,
     section = config.sections[sectionId]!,
     sectionDef = definition.sections.find((s) => s.id === sectionId)!,
@@ -49,29 +48,6 @@ export function ArtworkControls() {
     },
     [actions],
   );
-  useEffect(() => {
-    function key(event: KeyboardEvent) {
-      const target = event.target as HTMLElement | null;
-      if (target?.closest('input,textarea,select,[contenteditable="true"]'))
-        return;
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'z') {
-        event.preventDefault();
-        if (event.shiftKey) actions.redo();
-        else actions.undo();
-      } else if (event.key === 'Delete') {
-        const state = store.getState();
-        if (state.ui.selectedElementId) {
-          event.preventDefault();
-          actions.removeElement(
-            state.ui.selectedSectionId,
-            state.ui.selectedElementId,
-          );
-        }
-      }
-    }
-    window.addEventListener('keydown', key);
-    return () => window.removeEventListener('keydown', key);
-  }, [actions, store]);
   const variant = definition.variants.find((v) => v.id === config.variantId)!;
   function addText() {
     const id = crypto.randomUUID();
@@ -181,22 +157,6 @@ export function ArtworkControls() {
       ?.choices ?? [];
   return (
     <div className="artwork-controls">
-      <div className="history-buttons">
-        <button
-          type="button"
-          disabled={!history.past.length || !!history.transactionStart}
-          onClick={() => actions.undo()}
-        >
-          Undo
-        </button>
-        <button
-          type="button"
-          disabled={!history.future.length || !!history.transactionStart}
-          onClick={() => actions.redo()}
-        >
-          Redo
-        </button>
-      </div>
       <nav aria-label="Printable sections" className="section-picker">
         {definition.sections
           .filter((s) => s.variantIds.includes(config.variantId))

@@ -4,6 +4,8 @@ import { useEmbedMode } from '@features/embed/useEmbedMode';
 
 import { ConfiguratorProvider } from './features/ConfiguratorContext';
 import { OptionsPanel } from './features/panels/OptionsPanel';
+import { HistoryControls } from './ui/HistoryControls';
+const Editor = lazy(() => import('./features/editor2d/Editor'));
 const Viewer = lazy(() => import('./features/viewer3d/Viewer'));
 
 const areas = [
@@ -86,13 +88,15 @@ function AppShell() {
                   <Viewer />
                 </Suspense>
               ) : (
-                <div className="placeholder">
-                  <span className="placeholder-mark" aria-hidden="true">
-                    +
-                  </span>
-                  <p>{area.description}</p>
-                  <span className="status">Coming in a future phase</span>
-                </div>
+                <Suspense
+                  fallback={
+                    <div className="viewer-skeleton" role="status">
+                      Loading 2D editor…
+                    </div>
+                  }
+                >
+                  <Editor />
+                </Suspense>
               )}
             </section>
           ))}
@@ -104,6 +108,7 @@ function AppShell() {
               — <span>Pricing pending</span>
             </p>
           </div>
+          <HistoryControls />
           <button type="button" disabled>
             Add to cart
           </button>

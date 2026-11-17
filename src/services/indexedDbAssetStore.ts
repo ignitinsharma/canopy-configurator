@@ -24,6 +24,9 @@ export function createIndexedDbAssetStore(): AssetStore {
       );
       const metadata: AssetMetadata = {
         id: crypto.randomUUID(),
+        ...('name' in file && typeof file.name === 'string'
+          ? { name: file.name.slice(0, 255) }
+          : {}),
         mimeType: 'image/png',
         byteSize: blob.size,
         widthPx: width,

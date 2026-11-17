@@ -32,6 +32,7 @@ export const ElementSchema = z.discriminatedUnion('type', [
   ImageElementSchema,
 ]);
 export const AssetMetadataSchema = z.strictObject({
+  name: z.string().max(255).optional(),
   id: Id,
   mimeType: z.enum(['image/png', 'image/jpeg', 'image/webp']),
   byteSize: z.number().int().positive(),

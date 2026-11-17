@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { mapToCartLine } from '../../src/services/shopify/mapToCartLine';
 import { z } from 'zod';
 import {
   ApiErrorSchema,
@@ -94,7 +95,10 @@ export function createApiHandlers(options: HandlerOptions = {}) {
       ? Number(value)
       : fallback;
   const secret = () => {
-    const value = options.secret ?? env().PRICING_SIGNING_SECRET;
+    const value =
+      options.secret ??
+      env().QUOTE_SIGNING_SECRET ??
+      env().PRICING_SIGNING_SECRET;
     if (value) return value;
     if (process.env.NODE_ENV === 'production')
       throw new Error('Signing secret is not configured');
@@ -282,7 +286,11 @@ export function createApiHandlers(options: HandlerOptions = {}) {
                 _rules_version: canopyRules.version,
                 _config_ref: claims.configHash,
                 ...(input.pdfRef
-                  ? { _production_pdf_id: input.pdfRef.documentId }
+                  ? mapToCartLine({
+                      config: input.config,
+                      quote: recalculated,
+                      pdfRef: input.pdfRef,
+                    }).properties
                   : {}),
               },
             },

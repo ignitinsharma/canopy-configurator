@@ -675,3 +675,89 @@ h1 {
     --price-bar-height: 190px;
   }
 }
+
+.checkout-actions {
+  max-width: 100%;
+}
+.checkout-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.checkout-buttons button {
+  padding: 10px 14px;
+}
+.cart-confirmation {
+  padding: 12px;
+  background: #eef7ef;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 0.8rem;
+}
+.cart-confirmation p {
+  overflow-wrap: anywhere;
+}
+.cart-confirmation pre {
+  max-width: min(80vw, 700px);
+  max-height: 260px;
+  overflow: auto;
+  font-size: 0.65rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.checkout-actions [role='alert'] {
+  max-width: 400px;
+  color: #9d2828;
+  font-size: 0.8rem;
+}
+.live-price-bar .checkout-actions {
+  order: 5;
+}
+.live-price-bar .price-breakdown {
+  order: 6;
+}
+.app--embedded {
+  min-height: 0;
+}
+.app--embedded .workspace {
+  padding: 12px;
+}
+.app--embedded .workspace-area--options {
+  max-height: 700px;
+}
+.app--embedded .viewer {
+  height: 520px;
+}
+@media (width<900px) {
+  .workspace-area--viewer:not(.is-active) {
+    display: flex;
+    position: absolute;
+    left: -10000px;
+    top: 0;
+    width: 600px;
+    height: 560px;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .live-price-bar .checkout-actions {
+    width: 100%;
+  }
+  .live-price-bar {
+    max-height: 46dvh;
+  }
+  :root {
+    --price-bar-height: 235px;
+  }
+  .app--embedded .editor-viewport {
+    height: 260px;
+  }
+  .app--embedded .viewer {
+    height: 420px;
+  }
+  .app--embedded .workspace-area--options {
+    max-height: none;
+  }
+  body {
+    min-width: 0;
+  }
+}

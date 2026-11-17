@@ -5,7 +5,10 @@ import { createApiHandlers, errorResponse } from './handlers/api';
 export function pricingApiPlugin(env: Record<string, string>): Plugin {
   const handlers = createApiHandlers({
     env,
-    secret: env.PRICING_SIGNING_SECRET ?? 'canopy-local-development-secret',
+    secret:
+      env.QUOTE_SIGNING_SECRET ??
+      env.PRICING_SIGNING_SECRET ??
+      'canopy-local-development-secret',
   });
   const middleware: Connect.NextHandleFunction = (
     req: IncomingMessage,

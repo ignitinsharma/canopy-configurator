@@ -1,9 +1,10 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useState, useRef } from 'react';
 import clsx from 'clsx';
 import { useEmbedMode } from '@features/embed/useEmbedMode';
 
 import { ConfiguratorProvider } from './features/ConfiguratorContext';
 import { OptionsPanel } from './features/panels/OptionsPanel';
+import type { ViewerHandle } from './features/viewer3d/Viewer';
 import { PriceBar } from './features/pricing/PriceBar';
 const Editor = lazy(() => import('./features/editor2d/Editor'));
 const Viewer = lazy(() => import('./features/viewer3d/Viewer'));
@@ -39,6 +40,7 @@ export default function App() {
 }
 function AppShell() {
   const embed = useEmbedMode();
+  const viewerRef = useRef<ViewerHandle>(null);
   const [activeArea, setActiveArea] = useState<Area>('options');
   return (
     <div className={clsx('app', embed && 'app--embedded')}>
@@ -85,7 +87,7 @@ function AppShell() {
                     </div>
                   }
                 >
-                  <Viewer />
+                  <Viewer ref={viewerRef} />
                 </Suspense>
               ) : (
                 <Suspense
@@ -101,7 +103,7 @@ function AppShell() {
             </section>
           ))}
         </div>
-        <PriceBar />
+        <PriceBar viewerRef={viewerRef} />
       </main>
       {!embed && (
         <footer className="page-footer">

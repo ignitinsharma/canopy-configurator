@@ -123,6 +123,9 @@ it('rejects semantic config changes and mismatched PDF without trusting client t
       idempotencyKey: 'pdf-mismatch',
       pdfRef: {
         documentId: 'pdf',
+        id: 'pdf',
+        url: 'https://example.com/pdf',
+        sha256: 'b'.repeat(64),
         configFingerprint: 'a'.repeat(64),
         mediaType: 'application/pdf',
       },

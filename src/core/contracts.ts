@@ -66,6 +66,9 @@ export const PriceQuoteSchema = z
       add('Invalid quote lifetime');
   });
 export const PdfRefSchema = z.strictObject({
+  id: z.string().min(1),
+  url: z.url(),
+  sha256: Hash,
   documentId: z.string().min(1),
   configFingerprint: Hash,
   mediaType: z.literal('application/pdf'),
@@ -151,7 +154,15 @@ export interface AssetStore {
     context?: RequestContext,
   ): Promise<{ blob: Blob; metadata: AssetMetadata }>;
 }
+export interface PdfStore {
+  upload(
+    blob: Blob,
+    context: { configHash: string; filename: string },
+  ): Promise<PdfRef>;
+  dispose?(): void;
+}
 export interface ConfiguratorDependencies {
+  pdf?: PdfStore;
   pricing: PricingService;
   commerce: CommerceAdapter;
   assets: AssetStore;

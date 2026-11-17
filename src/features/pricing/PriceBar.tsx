@@ -1,12 +1,21 @@
+import type { RefObject } from 'react';
+import type { ViewerHandle } from '../viewer3d/Viewer';
+import { CheckoutActions } from '../checkout/CheckoutActions';
+import { useEmbedBridge } from '../embed/useEmbedBridge';
 import { useConfigSelector, useConfigurator } from '../ConfiguratorContext';
 import { usePriceQuote } from './usePriceQuote';
 import { HistoryControls } from '@ui/HistoryControls';
 const kinds = ['base', 'customization', 'option', 'fee', 'discount'] as const;
-export function PriceBar() {
+export function PriceBar({
+  viewerRef,
+}: {
+  viewerRef: RefObject<ViewerHandle>;
+}) {
   const config = useConfigSelector((s) => s.config),
     definition = useConfigSelector((s) => s.definition),
     { actions } = useConfigurator(),
     { quote, status, error, refresh } = usePriceQuote(config);
+  const send = useEmbedBridge(quote, status);
   const format = (value: number) =>
     quote
       ? new Intl.NumberFormat(undefined, {
@@ -91,9 +100,7 @@ export function PriceBar() {
           </select>
         </label>
       </div>
-      <button type="button" disabled>
-        Add to cart
-      </button>
+      <CheckoutActions viewerRef={viewerRef} status={status} send={send} />
       {quote && (
         <details className="price-breakdown">
           <summary>

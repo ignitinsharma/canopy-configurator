@@ -84,6 +84,7 @@ export async function computeQuote(
     config.quantity,
     {
       pricingRef: variant.basePriceRef,
+      printedSections: printed,
       shopifyVariantId: tier.shopifyVariantId,
     },
   );

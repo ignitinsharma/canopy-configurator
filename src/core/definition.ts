@@ -97,13 +97,22 @@ export const ProductDefinitionSchema = z.strictObject({
           maxTextLength: z.number().int().positive().max(5000),
           image: z.strictObject({
             allowedMimeTypes: z
-              .array(z.enum(['image/png', 'image/jpeg', 'image/webp']))
+              .array(
+                z.enum([
+                  'image/png',
+                  'image/jpeg',
+                  'image/webp',
+                  'image/svg+xml',
+                ]),
+              )
               .min(1),
             maxBytes: z.number().int().positive(),
             maxWidthPx: z.number().int().positive(),
             maxHeightPx: z.number().int().positive(),
             maxPixels: z.number().int().positive(),
             recommendedDpi: Positive,
+            warningDpi: Positive.default(100),
+            blockingDpi: Positive.default(50),
           }),
         }),
       }),

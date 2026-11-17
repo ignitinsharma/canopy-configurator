@@ -151,3 +151,68 @@ it('validates generic definition references and UV transforms', () => {
     }),
   ).toThrow();
 });
+
+it('copies artwork with unique IDs in one atomic undo step', () => {
+  const { store, actions } = setup();
+  actions.addElement('front', element);
+  const before = store.getState().config;
+  expect(actions.duplicateElement('front', element.id).ok).toBe(true);
+  expect(store.getState().config.sections.front?.elements).toHaveLength(2);
+  expect(store.getState().config.sections.front?.elements[1]?.id).not.toBe(
+    element.id,
+  );
+  actions.undo();
+  expect(store.getState().config).toBe(before);
+});
+it('rolls back a copy to an unknown target without changing valid targets', () => {
+  const { store, actions } = setup();
+  actions.addElement('front', element);
+  const before = store.getState();
+  expect(actions.copySection('front', ['unknown']).ok).toBe(false);
+  expect(store.getState()).toBe(before);
+});
+
+it('copies a whole canopy section to all eight sections as one undoable transaction', async () => {
+  const { default: raw } =
+    await import('@products/canopy-tent/definition.json');
+  const definition = parseDefinition(raw);
+  const runtime = createConfigStore(definition, {
+    schemaVersion: 1,
+    productId: definition.id,
+    definitionRevision: definition.revision,
+    variantId: '5x5',
+    quantity: 1,
+    optionSelections: Object.fromEntries(
+      definition.optionGroups.map((g) => [g.id, g.defaultValue]),
+    ),
+    sections: Object.fromEntries(
+      definition.sections.map((s) => [
+        s.id,
+        { backgroundColor: null, elements: [] },
+      ]),
+    ),
+    assets: {},
+  });
+  runtime.actions.addElement('roof-front', {
+    ...element,
+    fontId: 'inter-regular',
+  });
+  runtime.actions.setSectionBackground('roof-front', '#112233');
+  const before = runtime.store.getState();
+  expect(runtime.actions.applySectionToAll('roof-front').ok).toBe(true);
+  const after = runtime.store.getState();
+  expect(after.history.past).toHaveLength(before.history.past.length + 1);
+  const ids = Object.values(after.config.sections).map(
+    (s) => s.elements[0]?.id,
+  );
+  expect(new Set(ids).size).toBe(8);
+  expect(
+    Object.values(after.config.sections).every(
+      (s) => s.backgroundColor === '#112233',
+    ),
+  ).toBe(true);
+  runtime.actions.undo();
+  expect(runtime.store.getState().config).toBe(before.config);
+  runtime.actions.redo();
+  expect(runtime.store.getState().config).toBe(after.config);
+});

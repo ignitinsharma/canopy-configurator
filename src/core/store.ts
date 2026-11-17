@@ -4,6 +4,9 @@ import {
   ProductConfigSchema,
   type ProductConfig,
   type DesignElement,
+  type TextElement,
+  type ImageElement,
+  type AssetMetadata,
 } from './config';
 import { parseDefinition, type ProductDefinition } from './definition';
 import { validateConfig, type ValidationIssue } from './validation';
@@ -142,7 +145,9 @@ export function createConfigStore(
       elementId: string,
       patch: {
         type: DesignElement['type'];
-        changes: Partial<Omit<DesignElement, 'id' | 'type'>>;
+        changes:
+          | Partial<Omit<TextElement, 'id' | 'type'>>
+          | Partial<Omit<ImageElement, 'id' | 'type'>>;
       },
     ) =>
       commit((c) => {
@@ -153,6 +158,69 @@ export function createConfigStore(
           throw new Error('Immutable element identity');
         Object.assign(e, patch.changes);
       }),
+    addImage: (
+      sectionId: string,
+      asset: AssetMetadata,
+      element: ImageElement,
+    ) =>
+      commit((c) => {
+        if (element.assetId !== asset.id)
+          throw new Error('Asset reference mismatch');
+        c.assets[asset.id] = asset;
+        c.sections[sectionId]!.elements.push(element);
+      }),
+    duplicateElement: (sectionId: string, elementId: string) =>
+      commit((c) => {
+        const section = c.sections[sectionId]!,
+          index = section.elements.findIndex((e) => e.id === elementId);
+        if (index < 0) throw new Error('Unknown element');
+        const copy = structuredClone(section.elements[index]!);
+        copy.id = crypto.randomUUID();
+        copy.transform.position.x = Math.min(
+          1,
+          copy.transform.position.x + 0.03,
+        );
+        copy.transform.position.y = Math.min(
+          1,
+          copy.transform.position.y + 0.03,
+        );
+        section.elements.splice(index + 1, 0, copy);
+      }),
+    // One atomic commit/history entry for all targets; failed validation changes nothing.
+    copySection: (
+      sourceId: string,
+      targetIds: string[],
+      parts: 'background' | 'elements' | 'all' = 'all',
+    ) =>
+      commit((c) => {
+        const source = c.sections[sourceId];
+        if (!source) throw new Error('Unknown source');
+        for (const id of new Set(targetIds)) {
+          if (id === sourceId) continue;
+          const target = c.sections[id];
+          if (!target) throw new Error('Unknown target');
+          if (parts !== 'elements')
+            target.backgroundColor = source.backgroundColor;
+          if (parts !== 'background')
+            target.elements = source.elements.map((e) => ({
+              ...structuredClone(e),
+              id: crypto.randomUUID(),
+            }));
+        }
+      }),
+    applySectionToAll: (
+      sourceId: string,
+      parts: 'background' | 'elements' | 'all' = 'all',
+    ): CommandResult =>
+      actions.copySection(
+        sourceId,
+        definition.sections
+          .filter((s) =>
+            s.variantIds.includes(store.getState().config.variantId),
+          )
+          .map((s) => s.id),
+        parts,
+      ),
     removeElement: (id: string, elementId: string) =>
       commit((c) => {
         const s = c.sections[id]!;
@@ -190,7 +258,10 @@ export function createConfigStore(
             JSON.stringify(start) === JSON.stringify(s.config)
               ? s.history.past
               : [...s.history.past, start].slice(-50),
-          future: [],
+          future:
+            JSON.stringify(start) === JSON.stringify(s.config)
+              ? s.history.future
+              : [],
           transactionStart: null,
         },
       });

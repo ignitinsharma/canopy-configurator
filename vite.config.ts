@@ -1,9 +1,11 @@
 import { fileURLToPath, URL } from 'node:url';
 import react from '@vitejs/plugin-react';
+import { loadEnv } from 'vite';
+import { pricingApiPlugin } from './server/vitePlugin';
 import { defineConfig } from 'vitest/config';
 
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => ({
+  plugins: [react(), pricingApiPlugin(loadEnv(mode, process.cwd(), ''))],
   resolve: {
     alias: {
       '@core': fileURLToPath(new URL('./src/core', import.meta.url)),
@@ -15,4 +17,4 @@ export default defineConfig({
     },
   },
   test: { environment: 'jsdom', clearMocks: true },
-});
+}));

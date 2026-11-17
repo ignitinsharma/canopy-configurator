@@ -927,6 +927,25 @@
       ],
       "defaultValue": [],
       "maxSelections": 2
+    },
+    {
+      "id": "production-speed",
+      "label": "Production speed",
+      "kind": "single",
+      "role": "commercial",
+      "choices": [
+        {
+          "id": "standard",
+          "label": "Standard production (2 days)",
+          "pricingRef": "production-standard"
+        },
+        {
+          "id": "rush",
+          "label": "Rush production (1 day)",
+          "pricingRef": "production-rush"
+        }
+      ],
+      "defaultValue": "standard"
     }
   ]
 }

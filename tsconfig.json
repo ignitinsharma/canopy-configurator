@@ -26,5 +26,5 @@
       "@mocks/*": ["src/mocks/*"]
     }
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src", "server", "api", "vite.config.ts"]
 }

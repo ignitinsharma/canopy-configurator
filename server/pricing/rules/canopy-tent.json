@@ -1,0 +1,54 @@
+{
+  "productId": "canopy-tent",
+  "configurationRef": "canopy-pricing-v1",
+  "version": "mock-2026-11-v1",
+  "currency": "USD",
+  "minorUnitDigits": 2,
+  "quoteLifetimeSeconds": 900,
+  "variants": {
+    "canopy-base-5x5": {
+      "baseAmount": 24900,
+      "shopifyVariantId": "gid://shopify/ProductVariant/1001",
+      "includedPrintedSections": 2,
+      "extraSectionAmount": 1500,
+      "includedImages": 1,
+      "extraImageAmount": 1000,
+      "fullCoverageAmount": 2500
+    },
+    "canopy-base-6.5x6.5": {
+      "baseAmount": 34900,
+      "shopifyVariantId": "gid://shopify/ProductVariant/1002",
+      "includedPrintedSections": 2,
+      "extraSectionAmount": 2000,
+      "includedImages": 1,
+      "extraImageAmount": 1200,
+      "fullCoverageAmount": 3500
+    },
+    "canopy-base-8x8": {
+      "baseAmount": 44900,
+      "shopifyVariantId": "gid://shopify/ProductVariant/1003",
+      "includedPrintedSections": 4,
+      "extraSectionAmount": 2500,
+      "includedImages": 1,
+      "extraImageAmount": 1500,
+      "fullCoverageAmount": 4500
+    }
+  },
+  "fullCoverageAt": 6,
+  "optionPrices": {
+    "frame-color:silver": { "amount": 0, "kind": "option" },
+    "frame-color:black": { "amount": 2500, "kind": "option" },
+    "fabric-base-color:white": { "amount": 0, "kind": "option" },
+    "fabric-base-color:navy": { "amount": 0, "kind": "option" },
+    "accessory-sidewalls": { "amount": 9900, "kind": "option" },
+    "accessory-carry-bag": { "amount": 2900, "kind": "option" },
+    "production-standard": { "amount": 0, "kind": "fee", "showWhenZero": true },
+    "production-rush": { "amount": 5000, "kind": "fee" }
+  },
+  "quantityTiers": [
+    { "min": 1, "discountBps": 0 },
+    { "min": 2, "discountBps": 500 },
+    { "min": 5, "discountBps": 1000 },
+    { "min": 10, "discountBps": 1500 }
+  ]
+}

@@ -1,8 +1,12 @@
 # Canopy configurator
 
+**Live demo:** https://canopy-configurator-zeta.vercel.app
+
+**Embed demo:** https://canopy-configurator-zeta.vercel.app/embed-demo.html
+
 ## Overview
 
-Reusable React 18 + TypeScript product configurator: edit eight printable sections in 2D, preview a real tent in 3D, request signed prices, generate a production summary, and add to a mock Shopify cart. Live demo: **deployment URL pending**. Source assets are confidential and remain outside Git.
+Reusable React 18 + TypeScript product configurator: edit eight printable sections in 2D, preview a real tent in 3D, request signed prices, generate a production summary, and add to a mock Shopify cart. The public demos are linked above. Source assets are confidential and remain outside Git.
 
 ## Architecture
 

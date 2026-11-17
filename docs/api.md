@@ -66,7 +66,7 @@ HttpPricingService retries network failures and 5xx twice with 200/400 ms backof
 `pnpm dev` and `pnpm preview` both mount the same Web-standard handlers through a Vite transport plugin. API business logic is not duplicated in middleware. `api/price.ts` and `api/cart.ts` use the [Vercel Web Standard fetch export](https://vercel.com/docs/functions/runtimes/node-js). MSW is not started at runtime; tests use injected services/fetchers or invoke the handlers directly.
 
 - `VITE_API_BASE_URL`: public API directory URL, default `/api`; HttpPricingService appends `/price`, CommerceAdapter appends `/cart`.
-- `PRICING_SIGNING_SECRET`: server-only HMAC secret. Local Vite dev/preview use the documented development fallback; deployed production functions require this variable. Never prefix it with VITE_.
+- `QUOTE_SIGNING_SECRET`: server-only HMAC secret. Local Vite dev/preview use the documented development fallback; deployed production functions require this variable. Never prefix it with VITE_.
 - `MOCK_API_LATENCY_MIN_MS` / `MOCK_API_LATENCY_MAX_MS`: default 150/300 ms.
 - `MOCK_API_FAILURE_RATE`: default 0, use 1 to force failures or 0.25 for intermittent failures.
 

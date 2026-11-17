@@ -92,7 +92,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     },
     {
@@ -126,7 +128,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     },
     {
@@ -160,7 +164,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     },
     {
@@ -194,7 +200,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     },
     {
@@ -228,7 +236,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     },
     {
@@ -262,7 +272,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     },
     {
@@ -296,7 +308,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     },
     {
@@ -330,7 +344,9 @@
           "recommendedDpi": 150,
           "warningDpi": 100,
           "blockingDpi": 50
-        }
+        },
+        "safeMarginMeters": 0.025,
+        "bleedMeters": 0.003
       }
     }
   ],

@@ -93,6 +93,8 @@ export const ProductDefinitionSchema = z.strictObject({
         constraints: z.strictObject({
           maxElements: z.number().int().min(0).max(100),
           minFontSizePt: Positive,
+          safeMarginMeters: z.number().finite().nonnegative().default(0.025),
+          bleedMeters: z.number().finite().nonnegative().default(0.003),
           allowedFontIds: z.array(Id).min(1),
           maxTextLength: z.number().int().positive().max(5000),
           image: z.strictObject({

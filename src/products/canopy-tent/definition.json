@@ -13,7 +13,35 @@
     {
       "id": "inter-regular",
       "family": "Inter",
-      "fileUrl": "/fonts/inter-regular.woff2",
+      "fileUrl": "/fonts/inter-latin-400-normal.woff2",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "id": "montserrat-regular",
+      "family": "Montserrat",
+      "fileUrl": "/fonts/montserrat-latin-400-normal.woff2",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "id": "oswald-regular",
+      "family": "Oswald",
+      "fileUrl": "/fonts/oswald-latin-400-normal.woff2",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "id": "playfair-display-regular",
+      "family": "Playfair Display",
+      "fileUrl": "/fonts/playfair-display-latin-400-normal.woff2",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "id": "roboto-slab-regular",
+      "family": "Roboto Slab",
+      "fileUrl": "/fonts/roboto-slab-latin-400-normal.woff2",
       "weight": 400,
       "style": "normal"
     }
@@ -42,15 +70,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     },
@@ -63,15 +104,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     },
@@ -84,15 +138,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     },
@@ -105,15 +172,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     },
@@ -126,15 +206,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     },
@@ -147,15 +240,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     },
@@ -168,15 +274,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     },
@@ -189,15 +308,28 @@
       "constraints": {
         "maxElements": 20,
         "minFontSizePt": 12,
-        "allowedFontIds": ["inter-regular"],
+        "allowedFontIds": [
+          "inter-regular",
+          "montserrat-regular",
+          "oswald-regular",
+          "playfair-display-regular",
+          "roboto-slab-regular"
+        ],
         "maxTextLength": 1000,
         "image": {
-          "allowedMimeTypes": ["image/png", "image/jpeg", "image/webp"],
+          "allowedMimeTypes": [
+            "image/png",
+            "image/jpeg",
+            "image/webp",
+            "image/svg+xml"
+          ],
           "maxBytes": 10485760,
           "maxWidthPx": 8192,
           "maxHeightPx": 8192,
           "maxPixels": 40000000,
-          "recommendedDpi": 150
+          "recommendedDpi": 150,
+          "warningDpi": 100,
+          "blockingDpi": 50
         }
       }
     }

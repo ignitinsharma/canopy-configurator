@@ -1,3 +1,4 @@
+import type { ProductDefinition } from './definition';
 import type { ProductConfig, AssetMetadata } from './config';
 export interface RequestContext {
   signal?: AbortSignal;
@@ -47,7 +48,12 @@ export interface CommerceAdapter {
   ): Promise<CartReceipt>;
 }
 export interface AssetStore {
-  upload(file: Blob, context?: RequestContext): Promise<AssetMetadata>;
+  upload(
+    file: Blob,
+    context?: RequestContext & {
+      limits?: ProductDefinition['sections'][number]['constraints']['image'];
+    },
+  ): Promise<AssetMetadata>;
   resolve(
     assetId: string,
     context?: RequestContext,

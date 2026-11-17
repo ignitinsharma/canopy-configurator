@@ -10,4 +10,4 @@ Resolve primitives by MATERIAL NAME, never array index: `fabric_Mat` is printabl
 
 Normalize all models uniformly from their world-space bounding-box width along x to `realWidthMeters`: 1.524, 1.98 and 2.44 respectively. The 6.5 GLB mesh is mis-scaled. Never apply this normalization factor to the independently measured `sizeMeters`. No viewer is implemented here.
 
-Model URLs reserve future optimized files in `public/models`; original GLBs remain local. Font URL, palettes, accessories and print thresholds are proposed catalog defaults; the font file and optimized models are not supplied. Prices and Shopify mappings are resolved by services, not this definition. A 2048-square preview atlas is not a print master.
+Model URLs reserve future optimized files in `public/models`; original GLBs remain local. Five local regular font faces and optimized models are supplied. Palettes, accessories and print thresholds remain proposed catalog defaults. Prices and Shopify mappings are resolved by services, not this definition. A 2048-square preview atlas is not a print master.

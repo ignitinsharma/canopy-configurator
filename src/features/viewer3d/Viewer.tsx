@@ -149,6 +149,7 @@ function Scene({
           throw new Error('Model is not ready');
         const atlas = atlasRef.current;
         atlas?.setOverlay(null, false);
+        atlas?.flush();
         try {
           return renderCaptures(gl, scene, camera, width, height, options);
         } finally {

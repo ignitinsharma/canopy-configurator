@@ -20,6 +20,11 @@ it('exposes a disposable atlas slot and preserves artwork when marking a section
       let context = contexts.get(this);
       if (!context) {
         context = {
+          canvas: this,
+          clip: vi.fn(),
+          rect: vi.fn(),
+          scale: vi.fn(),
+          measureText: vi.fn(() => ({ width: 20 })),
           clearRect: vi.fn(),
           drawImage: vi.fn(),
           save: vi.fn(),
@@ -49,12 +54,14 @@ it('exposes a disposable atlas slot and preserves artwork when marking a section
   expect(atlas.getCanvas().width).toBe(2048);
   expect(atlas.texture.flipY).toBe(false);
   expect(atlas.texture.anisotropy).toBe(8);
+  act(() => atlas.flush());
   const base = atlas.getCanvas().getContext('2d')!;
   vi.mocked(base.fillRect).mockClear();
   const version = atlas.texture.version;
   act(() => {
     atlas.markDirty('roof-front');
     atlas.setOverlay('roof-left', true);
+    atlas.flush();
   });
   expect(atlas.texture.version).toBeGreaterThan(version);
   expect(base.fillRect).not.toHaveBeenCalled();

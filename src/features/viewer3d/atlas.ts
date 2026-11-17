@@ -1,3 +1,4 @@
+import { createDirtyQueue } from '@core/render/dirty';
 import { CanvasTexture, SRGBColorSpace } from 'three';
 import { atlasPolygon, sectionToUv, type Geometry } from '@core/geometry';
 export interface AtlasApi {
@@ -6,6 +7,7 @@ export interface AtlasApi {
   texture: CanvasTexture;
   setBaseColor(color: string): void;
   setOverlay(sectionId: string | null, debug: boolean): void;
+  flush(): void;
   dispose(): void;
 }
 /** Artwork and presentation canvases are separate: debug/selection never change real artwork.
@@ -14,6 +16,7 @@ export function createAtlas(
   geometry: Record<string, Geometry>,
   invalidate: () => void,
   maxAnisotropy = 1,
+  beforePresent: () => void = () => {},
 ): AtlasApi {
   const canvas = document.createElement('canvas'),
     presentation = document.createElement('canvas');
@@ -22,7 +25,9 @@ export function createAtlas(
     presentation.width =
     presentation.height =
       2048;
-  const base = canvas.getContext('2d'),
+  // CPU-backed artwork avoids GPU synchronization when section canvases are
+  // composited. The separate presentation canvas remains GPU-friendly.
+  const base = canvas.getContext('2d', { willReadFrequently: true }),
     ctx = presentation.getContext('2d');
   if (!base || !ctx) throw new Error('Canvas 2D unavailable');
   const texture = new CanvasTexture(presentation);
@@ -32,8 +37,13 @@ export function createAtlas(
   let selected: string | null = null,
     debug = false,
     disposed = false;
+  const queue = createDirtyQueue(() => redraw());
+  function schedule() {
+    if (!disposed) queue.mark(['presentation']);
+  }
   function redraw() {
     if (disposed) return;
+    beforePresent();
     ctx!.clearRect(0, 0, 2048, 2048);
     ctx!.drawImage(canvas, 0, 0);
     for (const [id, g] of Object.entries(geometry)) {
@@ -92,20 +102,25 @@ export function createAtlas(
   const api: AtlasApi = {
     texture,
     getCanvas: () => canvas,
-    markDirty: () => redraw(),
+    markDirty: () => schedule(),
+    flush() {
+      queue.flushNow();
+    },
     setBaseColor(color) {
       base.fillStyle = color;
       base.fillRect(0, 0, 2048, 2048);
-      redraw();
+      schedule();
     },
     setOverlay(id, enabled) {
+      if (selected === id && debug === enabled) return;
       selected = id;
       debug = enabled;
-      redraw();
+      schedule();
     },
     dispose() {
       if (disposed) return;
       disposed = true;
+      queue.dispose();
       texture.dispose();
       canvas.width = presentation.width = 0;
     },

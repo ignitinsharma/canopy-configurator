@@ -57,3 +57,18 @@ it('switches product size and section through the instance store controls', () =
     ).value,
   ).toBe('valance-right');
 });
+
+it('adds text, duplicates, deletes and undoes through artwork controls', () => {
+  render(<App />);
+  fireEvent.change(screen.getByLabelText('New text', { exact: true }), {
+    target: { value: 'ACME' },
+  });
+  fireEvent.click(screen.getByRole('button', { name: 'Add text' }));
+  expect(screen.getByRole('button', { name: 'ACME' })).toBeTruthy();
+  fireEvent.click(screen.getByRole('button', { name: 'Duplicate' }));
+  expect(screen.getAllByRole('button', { name: 'ACME' })).toHaveLength(2);
+  fireEvent.click(screen.getByRole('button', { name: 'Delete element 2' }));
+  expect(screen.getAllByRole('button', { name: 'ACME' })).toHaveLength(1);
+  fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+  expect(screen.getAllByRole('button', { name: 'ACME' })).toHaveLength(2);
+});

@@ -274,3 +274,111 @@ h1 {
     min-height: 350px;
   }
 }
+
+.workspace-area--options {
+  max-height: min(80dvh, 1000px);
+  overflow-y: auto;
+}
+.artwork-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.artwork-controls fieldset {
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.artwork-controls legend {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0 4px;
+}
+.artwork-controls input:not([type='range']):not([type='color']),
+.artwork-controls textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  font: inherit;
+}
+.artwork-controls textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+.artwork-controls button {
+  padding: 7px 9px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: var(--color-surface);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.artwork-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.artwork-controls button[aria-pressed='true'] {
+  background: var(--color-accent);
+  color: white;
+}
+.history-buttons,
+.palette,
+.element-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.section-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.element-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.element-select {
+  width: 100%;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.element-buttons {
+  margin-top: 5px;
+}
+.transform-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.transform-controls input {
+  min-width: 0;
+  width: 50%;
+}
+.upload-zone {
+  border-style: dashed !important;
+}
+.resolution-warnings {
+  padding: 12px 12px 12px 28px;
+  background: #fff5d6;
+  font-size: 0.8rem;
+  border-radius: 6px;
+}
+@media (width<900px) {
+  .workspace-area--options {
+    max-height: none;
+  }
+  .section-picker {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

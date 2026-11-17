@@ -1,3 +1,4 @@
+import { ArtworkControls } from './ArtworkControls';
 import { useConfigurator, useConfigSelector } from '../ConfiguratorContext';
 export function OptionsPanel() {
   const { actions } = useConfigurator();
@@ -55,6 +56,7 @@ export function OptionsPanel() {
             ))}
         </select>
       </label>
+      <ArtworkControls />
       <p className="status">
         Drag to orbit · Scroll to zoom · Click fabric to select a section
       </p>

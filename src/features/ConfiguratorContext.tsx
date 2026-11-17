@@ -2,14 +2,17 @@ import { createContext, useContext, useState, type ReactNode } from 'react';
 import { useStore } from 'zustand';
 import { createConfigStore } from '@core/store';
 import { parseDefinition } from '@core/definition';
+import { createIndexedDbAssetStore } from '@services/indexedDbAssetStore';
 import raw from '@products/canopy-tent/definition.json';
-export type Configurator = ReturnType<typeof createConfigStore>;
+export type Configurator = ReturnType<typeof createConfigStore> & {
+  assets: ReturnType<typeof createIndexedDbAssetStore>;
+};
 type State = ReturnType<Configurator['store']['getState']>;
 const Context = createContext<Configurator | null>(null);
 export function ConfiguratorProvider({ children }: { children: ReactNode }) {
   const [instance] = useState(() => {
     const definition = parseDefinition(raw);
-    return createConfigStore(definition, {
+    const runtime = createConfigStore(definition, {
       schemaVersion: 1,
       productId: definition.id,
       definitionRevision: definition.revision,
@@ -26,6 +29,7 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
       ),
       assets: {},
     });
+    return { ...runtime, assets: createIndexedDbAssetStore() };
   });
   return <Context.Provider value={instance}>{children}</Context.Provider>;
 }

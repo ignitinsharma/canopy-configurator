@@ -6,7 +6,7 @@ The canvas renders on demand with capped DPR, ACES tone mapping, local lights, d
 
 `prepareModel` owns cloned geometry/material/texture GPU resources and disposes them on unmount. The immutable, bounded three-model useGLTF cache retains original CPU resources for reuse/preloading; it is never disposed by one mounted instance. Texture image sources are shared read-only; cloned texture wrappers are owned by each instance.
 
-`useAtlasTexture(variantId)` returns an `AtlasApi` after effect allocation. `getCanvas()` returns the 2048-square artwork canvas; `markDirty(sectionId?)` copies current artwork to the texture presentation canvas and invalidates rendering. The placeholder repaints all content only when the fabric base palette changes. Selection and `?debug=atlas` are drawn on a separate presentation canvas, so they never enter real artwork. Quarter-turn arrows/labels use the same mapping as UV hit-testing. Actual user artwork compositing is deferred.
+`useAtlasTexture(variantId)` returns an effect-owned `AtlasApi`. Its artwork canvas is composited through the shared `renderSection` implementation and cached per-section canvases. Structurally changed sections and resolved font/image resources drive one coalesced animation-frame update. `getCanvas()` returns real artwork; `markDirty(sectionId?)` schedules presentation, and `flush()` completes queued work for capture. Selection/debug presentation never changes artwork. See `docs/artwork-rendering.md` for renderer contracts, asset handling and measurements.
 
 `flipY=false`, sRGB and anisotropy capped at 8 are explicit. The hook is disposed on variant change. A full atlas GPU upload currently accompanies each dirty update; partial CPU composition comes later.
 

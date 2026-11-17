@@ -2,7 +2,7 @@
 
 ## Overview
 
-Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. The demand-rendered 3D viewer is wired to size/color/section controls. 2D editing, artwork compositing, mock endpoint behavior, PDF and messaging remain future work.
+Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. The demand-rendered 3D viewer is wired to size/color/section controls. Shared artwork rendering, image uploads and temporary editing controls feed the live 3D preview. The Konva editor, mock endpoint behavior, PDF and messaging remain future work.
 
 ## Architecture
 
@@ -18,7 +18,7 @@ PricingService, CommerceAdapter and AssetStore contracts are implemented with in
 
 ## 2D/3D sync
 
-The 3D preview reads the shared Zustand config. Selection uses clipped UV polygons and updates the same store. The Konva editor and artwork compositor remain future work.
+The 3D preview reads the shared Zustand config. Selection uses clipped UV polygons and updates the same store. A shared local-canvas renderer composites customer text/images into the atlas, with per-section dirty tracking and separate debug/selection presentation. The Konva editor remains future work.
 
 ## Embedding (iframe + postMessage)
 
@@ -66,3 +66,7 @@ Below 900px the workspace uses Options / 2D / 3D view buttons and a pinned price
 Place original GLBs in ignored `assets-source/`, then run `pnpm optimize:models`. The script preserves node/material names, removes only printable baseColor artwork, keeps normal/roughness and frame maps, converts remaining textures to WebP (maximum 1024 square), applies Draco compression and copies its decoder locally. Optimized GLBs and decoder assets are committed; CI does not require confidential originals.
 
 Open `/?debug=atlas` to verify all sizes and sections using the Options controls. See `src/features/viewer3d/README.md` for the capture API, ownership/disposal rules and iframe hosting requirements.
+
+## Artwork editing
+
+The Options panel edits text, images, backgrounds and transforms. Fonts are bundled locally; normalized uploads live in IndexedDB. Run `pnpm fonts:sync` after updating Fontsource packages. See [shared renderer contracts and measurements](docs/artwork-rendering.md) for clipping, cache lifetimes, DPI warnings, undo semantics and the manual verification checklist.

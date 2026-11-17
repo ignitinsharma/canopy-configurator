@@ -2,7 +2,7 @@
 
 ## Overview
 
-Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. The demand-rendered 3D viewer is wired to size/color/section controls. Shared artwork rendering, image uploads and temporary editing controls feed the live 3D preview. The Konva editor now edits the same store with live 3D updates. Mock endpoint behavior, PDF and messaging remain future work.
+Private technical-test foundation for an embeddable, reusable product configurator. The responsive shell, core data layer, service contracts/adapters and measured canopy definition are implemented. The demand-rendered 3D viewer is wired to size/color/section controls. Shared artwork rendering, image uploads and temporary editing controls feed the live 3D preview. The Konva editor now edits the same store with live 3D updates. Dynamic pricing and signed mock cart endpoints now run through shared Web-standard handlers. PDF, live Shopify checkout and messaging remain future work.
 
 ## Architecture
 
@@ -70,3 +70,7 @@ Open `/?debug=atlas` to verify all sizes and sections using the Options controls
 ## Artwork editing
 
 The Options panel edits text, images, backgrounds and transforms. Fonts are bundled locally; normalized uploads live in IndexedDB. Run `pnpm fonts:sync` after updating Fontsource packages. See [shared renderer contracts and measurements](docs/artwork-rendering.md) for clipping, cache lifetimes, DPI warnings, undo semantics and the manual verification checklist.
+
+## Pricing API
+
+`pnpm dev` and `pnpm preview` mount the shared pricing/cart handlers. Server-side JSON rules own all price calculations; the UI only requests and formats quotes. See [API contracts, lifecycle, environment settings and backend replacement](docs/api.md). Use `VITE_API_BASE_URL` to point to another compatible API.

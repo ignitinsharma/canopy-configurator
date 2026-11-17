@@ -1,19 +1,33 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 import { useStore } from 'zustand';
 import { createConfigStore } from '@core/store';
+import type { ConfiguratorDependencies } from '@core/contracts';
+import { createConfiguratorRuntime } from '@core/runtime';
+import { createHttpAdapters } from '@services/httpAdapters';
 import { parseDefinition } from '@core/definition';
 import { createIndexedDbAssetStore } from '@services/indexedDbAssetStore';
 import { useConfiguratorKeyboard } from './keyboard';
 import raw from '@products/canopy-tent/definition.json';
 export type Configurator = ReturnType<typeof createConfigStore> & {
   assets: ReturnType<typeof createIndexedDbAssetStore>;
+  dependencies?: ConfiguratorDependencies;
 };
 type State = ReturnType<Configurator['store']['getState']>;
 const Context = createContext<Configurator | null>(null);
-export function ConfiguratorProvider({ children }: { children: ReactNode }) {
+export function ConfiguratorProvider({
+  children,
+  dependencies: injected,
+}: {
+  children: ReactNode;
+  dependencies?: ConfiguratorDependencies;
+}) {
   const [instance] = useState(() => {
     const definition = parseDefinition(raw);
-    const runtime = createConfigStore(definition, {
+    const dependencies = injected ?? {
+      ...createHttpAdapters(),
+      assets: createIndexedDbAssetStore(),
+    };
+    const runtime = createConfiguratorRuntime(definition, dependencies, {
       schemaVersion: 1,
       productId: definition.id,
       definitionRevision: definition.revision,
@@ -30,7 +44,7 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
       ),
       assets: {},
     });
-    return { ...runtime, assets: createIndexedDbAssetStore() };
+    return { ...runtime, assets: dependencies.assets };
   });
   useConfiguratorKeyboard(instance);
   return <Context.Provider value={instance}>{children}</Context.Provider>;

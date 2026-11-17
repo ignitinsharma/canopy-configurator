@@ -4,7 +4,7 @@ import { useEmbedMode } from '@features/embed/useEmbedMode';
 
 import { ConfiguratorProvider } from './features/ConfiguratorContext';
 import { OptionsPanel } from './features/panels/OptionsPanel';
-import { HistoryControls } from './ui/HistoryControls';
+import { PriceBar } from './features/pricing/PriceBar';
 const Editor = lazy(() => import('./features/editor2d/Editor'));
 const Viewer = lazy(() => import('./features/viewer3d/Viewer'));
 
@@ -101,18 +101,7 @@ function AppShell() {
             </section>
           ))}
         </div>
-        <aside className="price-bar" aria-label="Price and checkout">
-          <div>
-            <span className="status">Estimated total</span>
-            <p className="price">
-              — <span>Pricing pending</span>
-            </p>
-          </div>
-          <HistoryControls />
-          <button type="button" disabled>
-            Add to cart
-          </button>
-        </aside>
+        <PriceBar />
       </main>
       {!embed && (
         <footer className="page-footer">

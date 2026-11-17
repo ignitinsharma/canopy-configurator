@@ -560,3 +560,118 @@ h1 {
     min-height: 220px;
   }
 }
+
+.live-price-bar {
+  flex-wrap: wrap;
+  align-items: center;
+}
+.price-summary {
+  min-width: 150px;
+}
+.price-updating {
+  display: inline-block;
+  min-width: 90px;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  animation: viewer-pulse 1s ease-in-out infinite alternate;
+}
+.price-controls {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.price-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.75rem;
+}
+.quantity-stepper {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.quantity-stepper input {
+  width: 50px;
+  text-align: center;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font: inherit;
+}
+.quantity-stepper button,
+.price-summary button {
+  padding: 6px 10px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.price-controls select {
+  max-width: 210px;
+  padding: 7px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: var(--color-surface);
+  font: inherit;
+}
+.price-breakdown {
+  flex-basis: 100%;
+  font-size: 0.8rem;
+}
+.price-breakdown summary {
+  cursor: pointer;
+}
+.price-breakdown h2 {
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  margin: 12px 0 4px;
+}
+.price-breakdown ul {
+  list-style: none;
+  padding: 0;
+  max-width: 700px;
+}
+.price-breakdown li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 5px 0;
+}
+@media (width<900px) {
+  .live-price-bar {
+    display: flex;
+    max-height: 42dvh;
+    overflow-y: auto;
+    gap: 8px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+  .live-price-bar .price-summary {
+    flex: 1;
+    min-width: 130px;
+  }
+  .live-price-bar .price-controls {
+    width: 100%;
+    order: 4;
+    justify-content: space-between;
+  }
+  .live-price-bar .price-controls label {
+    flex-direction: row;
+    align-items: center;
+  }
+  .live-price-bar .history-controls {
+    order: 2;
+  }
+  .live-price-bar > button {
+    order: 3;
+    padding: 8px;
+  }
+  .live-price-bar .price-breakdown {
+    order: 5;
+  }
+  .live-price-bar .price-controls select {
+    max-width: 175px;
+  }
+  :root {
+    --price-bar-height: 190px;
+  }
+}

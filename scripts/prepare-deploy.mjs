@@ -7,12 +7,15 @@ const raw = process.env.VITE_ALLOWED_PARENT_ORIGINS ?? '',
     .map((s) => s.trim())
     .filter(Boolean);
 for (const origin of origins) {
+  if (origin === '*') continue;
   const parsed = new URL(origin);
   if (
     !['http:', 'https:'].includes(parsed.protocol) ||
     parsed.origin !== origin
   )
-    throw new Error('Use exact HTTP(S) parent origins, never * or paths');
+    throw new Error(
+      'Use exact HTTP(S) parent origins or explicit *, never paths',
+    );
 }
 const csp = `frame-ancestors 'self'${origins.length ? ' ' + origins.join(' ') : ''}`;
 config.headers.find((h) => h.source === '/(.*)').headers = [

@@ -54,7 +54,7 @@ Download or checkout lazily generates `order-<configHash8>.pdf`: five clean 3D v
 
 Use `<iframe src="https://YOUR-APP/?embed=1" title="Tent configurator"></iframe>`. [embed-demo.html](public/embed-demo.html) provides a working host, message log, controls and a Shopify theme listener example. Fonts, models and Draco are served locally.
 
-Every message has `{source:'canopy-configurator', version:1, type, payload}`. Receivers check the actual parent window, exact origin and a strict schema. Set `VITE_ALLOWED_PARENT_ORIGINS` to comma-separated HTTPS origins; wildcard is permitted only in development. Production defaults to rejecting parent messages.
+Every message has `{source:'canopy-configurator', version:1, type, payload}`. Receivers check the actual parent window, exact origin and a strict schema. Set `VITE_ALLOWED_PARENT_ORIGINS` to comma-separated HTTPS origins; an explicitly configured `*` also allows any parent origin for this public demo. Production defaults to rejecting parent messages.
 
 | Direction | Types                      | Payload                                             |
 | --------- | -------------------------- | --------------------------------------------------- |
@@ -102,13 +102,13 @@ pnpm dev
 
 Open the printed URL; `/embed-demo.html` demonstrates iframe integration. `pnpm preview` serves the production build plus the same mock API. Originals in `assets-source/` are optional for running: committed optimized models are sufficient. `pnpm optimize:models` regenerates them when originals are available.
 
-| Variable                         | Purpose                                                             |
-| -------------------------------- | ------------------------------------------------------------------- |
-| QUOTE_SIGNING_SECRET             | Server-only HMAC secret; set a long random secret in production     |
-| MOCK_API_FAILURE_RATE            | 0–1 simulated failures; default 0                                   |
-| MOCK_API_LATENCY_MIN_MS / MAX_MS | Simulated API latency; defaults 150/300                             |
-| VITE_ALLOWED_PARENT_ORIGINS      | Exact comma-separated parent origins; dev-only wildcard default     |
-| VITE_API_BASE_URL                | API prefix, default `/api`; point adapters at a replacement backend |
+| Variable                         | Purpose                                                                            |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| QUOTE_SIGNING_SECRET             | Server-only HMAC secret; set a long random secret in production                    |
+| MOCK_API_FAILURE_RATE            | 0–1 simulated failures; default 0                                                  |
+| MOCK_API_LATENCY_MIN_MS / MAX_MS | Simulated API latency; defaults 150/300                                            |
+| VITE_ALLOWED_PARENT_ORIGINS      | Exact comma-separated parent origins or explicit `*`; wildcard default only in dev |
+| VITE_API_BASE_URL                | API prefix, default `/api`; point adapters at a replacement backend                |
 
 Never prefix the signing secret with `VITE_`. Legacy `PRICING_SIGNING_SECRET` remains a fallback. Replace mock backend handlers/engine and storage adapters through their contracts, preserving request/response validation.
 

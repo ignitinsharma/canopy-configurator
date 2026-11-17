@@ -5,3 +5,4 @@ dist/
 coverage/
 assets-source/
 *.tsbuildinfo
+.vercel

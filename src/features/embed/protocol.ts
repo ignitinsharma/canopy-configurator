@@ -59,7 +59,7 @@ export function allowedOrigins(
         .filter(Boolean),
     ),
   ].filter((value) => {
-    if (value === '*') return dev;
+    if (value === '*') return true;
     try {
       const url = new URL(value);
       return ['http:', 'https:'].includes(url.protocol) && url.origin === value;

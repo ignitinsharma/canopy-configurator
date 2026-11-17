@@ -34,7 +34,11 @@ it('requires an allowed exact parent origin and versioned valid messages', () =>
     ),
   ).toBeNull();
   expect(allowedOrigins(undefined, false)).toEqual([]);
-  expect(allowedOrigins('*', false)).toEqual([]);
+  expect(allowedOrigins('*', false)).toEqual(['*']);
+  expect(
+    validateIncoming(message, 'https://reviewer.example', ['*'], true),
+  ).not.toBeNull();
+  expect(validateIncoming(message, 'null', ['*'], true)).toBeNull();
   expect(allowedOrigins(undefined, true)).toEqual(['*']);
 });
 it('allows only bounded theme variables, no CSS URLs', () => {

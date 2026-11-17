@@ -123,4 +123,4 @@ pnpm test
 pnpm build
 ```
 
-Tests cover schemas/migrations, transaction history, measured geometry, UV hit testing, normalized transforms/snapping, shared rendering/clipping, assets/DPI, pricing boundaries/signatures, async quote handling, Shopify mapping, embed validation and PDF header generation. CI runs the same checks. Manually verify logo/text alignment on roof and valance, whole-gesture undo, 3D section selection, mobile touch, price errors/retry, PDF download, cart payload and iframe messages.
+Tests cover schemas/migrations, transaction history, measured geometry, UV hit testing, normalized transforms/snapping, shared rendering/clipping, assets/DPI, pricing boundaries/signatures, async quote handling, Shopify mapping, embed validation and PDF header generation. CI runs the same checks plus `node scripts/check-api-runtime.mjs`, which executes emitted API JavaScript in plain Node to catch serverless import-resolution failures. Manually verify logo/text alignment on roof and valance, whole-gesture undo, 3D section selection, mobile touch, price errors/retry, PDF download, cart payload and iframe messages.

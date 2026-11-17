@@ -3,8 +3,8 @@ import {
   ProductConfigSchema,
   type ProductConfig,
   type AssetMetadata,
-} from './config';
-import type { ProductDefinition } from './definition';
+} from './config.js';
+import type { ProductDefinition } from './definition.js';
 const Money = z.number().int().safe();
 const Hash = z.string().regex(/^[a-f0-9]{64}$/);
 export const PriceLineSchema = z.strictObject({

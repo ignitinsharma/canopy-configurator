@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import data from './rules/canopy-tent.json';
+import data from './rules/canopy-tent.json' with { type: 'json' };
 const Amount = z.number().int().min(0).max(100000000);
 export const PricingRulesSchema = z.strictObject({
   productId: z.string(),

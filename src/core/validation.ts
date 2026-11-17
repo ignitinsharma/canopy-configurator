@@ -1,5 +1,5 @@
-import type { ProductConfig } from './config';
-import type { ProductDefinition } from './definition';
+import type { ProductConfig } from './config.js';
+import type { ProductDefinition } from './definition.js';
 export interface ValidationIssue {
   code: string;
   path: Array<string | number>;

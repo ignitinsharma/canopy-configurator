@@ -1,4 +1,4 @@
-import { ProductConfigSchema, type ProductConfig } from './config';
+import { ProductConfigSchema, type ProductConfig } from './config.js';
 function canonical(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonical);
   if (value !== null && typeof value === 'object')

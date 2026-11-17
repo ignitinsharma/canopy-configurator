@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { mapToCartLine } from '../../src/services/shopify/mapToCartLine';
+import { mapToCartLine } from '../../src/services/shopify/mapToCartLine.js';
 import { z } from 'zod';
 import {
   ApiErrorSchema,
@@ -8,18 +8,18 @@ import {
   CartReceiptSchema,
   type ApiError,
   type CartReceipt,
-} from '../../src/core/contracts';
-import { parseDefinition } from '../../src/core/definition';
-import definitionData from '../../src/products/canopy-tent/definition.json';
-import { fingerprint } from '../../src/core/serialization';
-import { computeQuote } from '../pricing/engine';
-import { canopyRules } from '../pricing/rules';
+} from '../../src/core/contracts.js';
+import { parseDefinition } from '../../src/core/definition.js';
+import definitionData from '../../src/products/canopy-tent/definition.json' with { type: 'json' };
+import { fingerprint } from '../../src/core/serialization.js';
+import { computeQuote } from '../pricing/engine.js';
+import { canopyRules } from '../pricing/rules.js';
 import {
   encodeQuoteId,
   decodeQuoteId,
   signQuote,
   verifySignature,
-} from '../pricing/signature';
+} from '../pricing/signature.js';
 const definition = parseDefinition(definitionData);
 type Code = ApiError['error']['code'];
 class HttpError extends Error {

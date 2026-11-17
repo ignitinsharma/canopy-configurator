@@ -1,6 +1,6 @@
 import type { z } from 'zod';
-import type { GeometrySchema } from './definition';
-import type { DesignElement } from './config';
+import type { GeometrySchema } from './definition.js';
+import type { DesignElement } from './config.js';
 export type Geometry = z.infer<typeof GeometrySchema>;
 export type Point = readonly [number, number];
 export function clipPolygon(g: Pick<Geometry, 'shape'>): Point[] {

@@ -2,14 +2,14 @@ import {
   PriceQuoteSchema,
   type PriceQuote,
   type PriceLine,
-} from '../../src/core/contracts';
-import type { ProductConfig } from '../../src/core/config';
-import type { ProductDefinition } from '../../src/core/definition';
-import { fingerprint } from '../../src/core/serialization';
-import { validateConfig } from '../../src/core/validation';
-import { selectResolutionWarnings } from '../../src/core/resolution';
-import { signQuote } from './signature';
-import type { PricingRules } from './rules';
+} from '../../src/core/contracts.js';
+import type { ProductConfig } from '../../src/core/config.js';
+import type { ProductDefinition } from '../../src/core/definition.js';
+import { fingerprint } from '../../src/core/serialization.js';
+import { validateConfig } from '../../src/core/validation.js';
+import { selectResolutionWarnings } from '../../src/core/resolution.js';
+import { signQuote } from './signature.js';
+import type { PricingRules } from './rules.js';
 export interface QuoteContext {
   definition: ProductDefinition;
   currency: string;

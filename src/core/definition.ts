@@ -1,6 +1,6 @@
-import { atlasPolygon, polygonsOverlap } from './geometry';
+import { atlasPolygon, polygonsOverlap } from './geometry.js';
 import { z } from 'zod';
-import { Id, Color, Positive, Unit } from './config';
+import { Id, Color, Positive, Unit } from './config.js';
 const Resource = z.string().regex(/^\/(?!\/)[^\s?#]+$/);
 export const GeometrySchema = z.strictObject({
   // Image coordinates: v increases from TOP. CanvasTexture must use flipY=false.

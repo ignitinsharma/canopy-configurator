@@ -1,2 +1,2 @@
-import { handlePrice } from '../server/handlers/api';
+import { handlePrice } from '../server/handlers/api.js';
 export default { fetch: handlePrice };

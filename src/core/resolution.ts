@@ -1,6 +1,6 @@
-import type { ProductConfig, ImageElement, AssetMetadata } from './config';
-import type { ProductDefinition } from './definition';
-import type { Geometry } from './geometry';
+import type { ProductConfig, ImageElement, AssetMetadata } from './config.js';
+import type { ProductDefinition } from './definition.js';
+import type { Geometry } from './geometry.js';
 /** Contain fit: use the actual drawn width, not the potentially letterboxed box. */
 export function effectiveDpi(
   asset: Pick<AssetMetadata, 'widthPx' | 'heightPx'>,

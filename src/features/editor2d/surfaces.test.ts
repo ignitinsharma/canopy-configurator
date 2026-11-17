@@ -51,5 +51,7 @@ it('logs dev-only render counts and leaves seven unchanged thumbnails untouched'
   instance.actions.selectElement(null);
   surfaces.flush();
   expect(surfaces.getRenderCounts()).toEqual(after);
+  const published = surfaces.get('art', 'roof-front');
   surfaces.dispose();
+  expect(published.canvas!.width).toBeGreaterThan(0);
 });

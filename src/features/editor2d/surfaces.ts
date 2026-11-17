@@ -148,9 +148,8 @@ export function createEditorSurfaces(
       queue.dispose();
       fonts.dispose();
       bitmaps.dispose();
-      entries.forEach((e) => {
-        if (e.canvas) e.canvas.width = e.canvas.height = 0;
-      });
+      // Published canvases may still be read by Konva until the next React
+      // commit. Release our references; do not zero live snapshot dimensions.
       entries.clear();
       listeners.clear();
     },

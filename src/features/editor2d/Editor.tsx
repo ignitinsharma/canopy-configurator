@@ -64,14 +64,16 @@ const ArtworkLayer = memo(function ArtworkLayer({
   return (
     <Layer listening={false}>
       <Group x={x} y={y} scaleX={scale} scaleY={scale}>
-        {surface.canvas && (
-          <KonvaImage
-            ref={image}
-            image={surface.canvas}
-            width={size.width}
-            height={size.height}
-          />
-        )}
+        {surface.canvas &&
+          surface.canvas.width > 0 &&
+          surface.canvas.height > 0 && (
+            <KonvaImage
+              ref={image}
+              image={surface.canvas}
+              width={size.width}
+              height={size.height}
+            />
+          )}
       </Group>
     </Layer>
   );

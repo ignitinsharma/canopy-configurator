@@ -17,7 +17,13 @@ const Thumbnail = memo(function Thumbnail({
     surface = useSurface(surfaces, 'thumb', id),
     { actions } = useConfigurator();
   useEffect(() => {
-    if (!ref.current || !surface.canvas) return;
+    if (
+      !ref.current ||
+      !surface.canvas ||
+      !surface.canvas.width ||
+      !surface.canvas.height
+    )
+      return;
     ref.current.width = surface.canvas.width;
     ref.current.height = surface.canvas.height;
     ref.current.getContext('2d')?.drawImage(surface.canvas, 0, 0);
